@@ -548,12 +548,16 @@ class EditUserSteps(View):
 
 class ManageWhitelabel(View):
     def get(self, request):
-        obj = WhiteLabelService.get_administrated_subdomains(request).first()
-        form = WhiteLabelForm(instance=obj)
-        return render(request, 'PortalManagement/ManageWhiteLabel.html', {'form': form, 'name': obj.sub_name})
+        objs = WhiteLabelService.get_administrated_subdomains(request)
+        contents = []
+        for idx, obj in enumerate(objs):
+            form = WhiteLabelForm(instance=obj)
+            contents.append({'form': form, 'name': obj.sub_name, 'index': idx})
+
+        return render(request, 'PortalManagement/ManageWhiteLabel.html', {'contents': contents})
 
     def post(self, request):
-        obj = WhiteLabelService.get_administrated_subdomains(request).first()
+        obj = Subdomain.objects.filter(sub_name=request.POST.get('sub_name')).first()
         form = WhiteLabelForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()

@@ -11,7 +11,7 @@ class WhiteLabelForm(forms.ModelForm):
         model = Subdomain
         exclude = [
             'is_payment_done',
-            'sub_name',
+            # 'sub_name',
             'admins',
             'show_becoming_whitelabel_partner',
             'offer_paid_whitelabel',
@@ -29,6 +29,7 @@ class WhiteLabelForm(forms.ModelForm):
             'is_paid_for_whitelabel',
             'can_edit'
         ]
+        widgets = {'sub_name': forms.HiddenInput()}
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
