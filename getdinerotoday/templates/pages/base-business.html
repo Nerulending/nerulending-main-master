@@ -100,13 +100,23 @@
 
                        {% if links %}
                             {% for link in links %}
-                                <li class="nav-item">
-                                    <a href="{{link.link}}" class="nav-link" target="_blank">
-                                        <span class="toggle-none">
-                                            {{link.name}}
-                                        </span>
-                                    </a>
-                                </li>  
+                                {% if dynamic.is_main_site and link.is_main_site %}
+                                    <li class="nav-item">
+                                        <a href="{{link.link}}" class="nav-link" target="_blank">
+                                            <span class="toggle-none">
+                                                {{link.name}}
+                                            </span>
+                                        </a>
+                                    </li>  
+                                {% elif not dynamic.is_main_site and link.is_every_site %}
+                                    <li class="nav-item">
+                                        <a href="{{link.link}}" class="nav-link" target="_blank">
+                                            <span class="toggle-none">
+                                                {{link.name}}
+                                            </span>
+                                        </a>
+                                    </li>  
+                                {% endif %}
                             {% endfor %}   
                        {% endif %}
 
@@ -428,23 +438,25 @@
                             </li>
                     {% endif %} -->
 
-                        {% if dynamic.show_affiliate %}
+                        {% comment %} {% if dynamic.show_affiliate %}
                             <li class="nav-item">
                                 <a href="{% url 'affiliate:home-affiliate' %}" class="nav-link">Go To
                                     Affiliate Agent
                                     Portal</a>
                             </li>
-                        {% endif %}
+                        {% endif %} {% endcomment %}
                         {% if dynamic.is_paid_for_whitelabel%}
                             <li class="nav-item">
                                 <a href="{% url 'whitelabelpartnerportal:home-whitelabel' %}" class="nav-link"> Go To
                                     White Label Partner Portal</a>
                             </li>
+                        {% comment %} 
                         {% else %}
-                            {% comment %} <li class="nav-item">
+                             <li class="nav-item">
                                 <a href="{% url 'freewhitelabelprogramonboarding:onboarding' %}" class="nav-link"> Go To
                                     Free White Label Partner Portal</a>
-                            </li> {% endcomment %}
+                            </li> 
+                        {% endcomment %}
                         {% endif %}
                         <!-- Point: 12 Done -->
                         <!-- <li class="nav-item">

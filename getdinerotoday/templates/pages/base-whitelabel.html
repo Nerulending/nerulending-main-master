@@ -62,18 +62,18 @@
                     <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:mysales' %}" class="nav-link">My
                         Sales</a></li>
 
-                    {% if iswhitelabeladmin %}
+                    {% comment %} {% if iswhitelabeladmin %}
                         <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:productmanagement' %}"
                                                 class="nav-link">Manage Products</a></li>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
 
                     {% if iswhitelabeladmin %}
                         <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:manageportal' %}"
                                                 class="nav-link">Manage Portal</a></li>
                     {% endif %}
 
-                    <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:networkmarketing' %}"
-                                            class="nav-link">How To Leverage Your Network</a></li>
+                    {% comment %} <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:networkmarketing' %}"
+                                            class="nav-link">How To Leverage Your Network</a></li> {% endcomment %}
 
                     <!-- <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:enteraffiliates' %}" class="nav-link">Enter Affiliate Agents</a></li> -->
                     <!--  <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:salesaffiliates' %}" class="nav-link">Sales Affiliates Overview</a></li> -->
@@ -101,22 +101,22 @@
                         <a class="nav-link" href="javascript: void(0);" aria-expanded="false"> <span
                                 class="toggle-none"> Marketing Information <span class="fa arrow"></span></span></a>
                         <ul class="nav-second-level nav flex-column sub-menu" aria-expanded="false">
-                            <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:whitelabelwebinar' %}"
+                            {% comment %} <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:whitelabelwebinar' %}"
                                                     class="nav-link"> White Label Webinar</a></li>
                             <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:buywhitelabelwebsite' %}"
                                                     class="nav-link"> Buy White Label Website </a></li>
                             <li class="nav-item"><a
                                     href="{% url 'whitelabelpartnerportal:buywhitelabelbusinesspackage' %}"
-                                    class="nav-link"> Buy White Label Business Package </a></li>
+                                    class="nav-link"> Buy White Label Business Package </a></li> {% endcomment %}
                             <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:viewportals' %}"
                                                     class="nav-link"> View Your White Label Portal</a></li>
-                            <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:viewwhitelabelwebsite' %}"
+                            {% comment %} <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:viewwhitelabelwebsite' %}"
                                                     class="nav-link"> View Your White Label Website (Only For Those Who
                                 Have Purchased)</a></li>
                             <li class="nav-item"><a
                                     href="{% url 'whitelabelpartnerportal:viewwhitelabelbusinesspackage' %}"
                                     class="nav-link"> View Your White Label Business Package (Only For Those Who Have
-                                Purchased)</a></li>
+                                Purchased)</a></li> {% endcomment %}
                         </ul>
                     </li>
                     <li class="nav-item"><a href="{% url 'whitelabelpartnerportal:partnercommisssions' %}"
