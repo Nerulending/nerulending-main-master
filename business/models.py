@@ -5,6 +5,9 @@ from django.utils import timezone
 from core.models import BusinessTierModel, TimeTrackedModel
 from user.models import Profile
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from urllib.parse import urlparse
 
 class ModelMixin:
     def save(self, *args, **kwargs):
@@ -586,4 +589,10 @@ class NavigationLinks(models.Model):
     is_every_site = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name.capitalize()
+        return self.name.capitalize()   
+    
+@receiver(pre_save, sender=NavigationLinks)
+def check_navigtion_link(sender, instance, **kwargs):
+    parsed = urlparse(instance.link)
+    if parsed.scheme == '':
+        instance.link = 'https://' + instance.link
