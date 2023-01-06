@@ -69,13 +69,13 @@
                                             Portals</a>
                                     </li>
                                 {% endif %}
-                                {% if dynamic.is_main_site %}
+                                {% comment %} {% if dynamic.is_main_site %}
                                     <li class="dropdown-divider"></li>
                                     <li>
                                         <a href="{% url 'business:guided-creation-progress' %}"><i
                                                 class="icon-briefcase"></i>Guided Creation Progress</a>
                                     </li>
-                                {% endif %}
+                                {% endif %} {% endcomment %}
                                 <li class="dropdown-divider"></li>
                                 <li>
                                     <a href="{% url 'business:business_credibility_checklist' %}"><i
