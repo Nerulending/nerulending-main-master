@@ -5,7 +5,7 @@ from django.views import View
 
 from dynamic.models import Subdomain
 from products.models import UserStepsProduct
-from business.models import NavigationLinks
+from business.models import NavigationLinks, Page
 
 
 def get_prices(sub_domain):
@@ -31,7 +31,8 @@ class HomePage(View):
         request.resolver_match.app_name = 'business'
         if request.user.is_authenticated:
             links = NavigationLinks.objects.order_by('name')
-            context = {'links': links}
+            pages = Page.objects.order_by('name')
+            context = {'links': links, 'pages': pages}
             return render(request, 'homepage.html', context=context)
         else:
             return HttpResponseRedirect("/user/login")
@@ -133,3 +134,9 @@ class FAQView(View):
 class TestimonialsView(View):
     def get(self, request):
         return render(request, 'landingpages/testimonial.html')
+
+class PageView(View):
+    def get(self, request, page_id):
+        page = Page.objects.get(id=page_id)
+        context = {'page': page}
+        return render(request, 'pagecontent.html', context=context)

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 
 from core.models import BusinessTierModel, TimeTrackedModel
@@ -8,6 +9,7 @@ from user.models import Profile
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from urllib.parse import urlparse
+
 
 class ModelMixin:
     def save(self, *args, **kwargs):
@@ -597,5 +599,29 @@ def check_navigtion_link(sender, instance, **kwargs):
     parsed = urlparse(instance.link)
     if parsed.scheme == '':
         instance.link = 'https://' + instance.link
+
+
+class Page(models.Model):
+    class meta:
+        db_table = "business_page"
+    
+    name = models.CharField(max_length=200)
+    video = models.CharField(max_length=100)
+
+    is_main_site = models.BooleanField(default=False)
+    is_every_site = models.BooleanField(default=False)
+    is_whitelabel_site = models.BooleanField(default=False)
+
+    column_name_1 = models.CharField(max_length=50, default='', blank=True)
+    column_name_2 = models.CharField(max_length=50, default='', blank=True)
+    column_name_3 = models.CharField(max_length=50, default='', blank=True)
+    column_name_4 = models.CharField(max_length=50, default='', blank=True)
+    column_name_5 = models.CharField(max_length=50, default='', blank=True)
+    column_name_6 = models.CharField(max_length=50, default='', blank=True)
+
+    data = models.JSONField(default='', blank=True)
+
+    def __str__(self):
+        return self.name.capitalize()   
 
 

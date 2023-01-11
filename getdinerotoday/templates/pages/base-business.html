@@ -119,6 +119,27 @@
                                 {% endif %}
                             {% endfor %}   
                        {% endif %}
+                       {% if pages %}
+                            {% for page in pages %}
+                                {% if dynamic.is_main_site and page.is_main_site %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'page' page.id %}" class="nav-link" target="_blank">
+                                            <span class="toggle-none">
+                                                {{page.name}}
+                                            </span>
+                                        </a>
+                                    </li>  
+                                {% elif not dynamic.is_main_site and page.is_every_site %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'page' page.id %}" class="nav-link" target="_blank">
+                                            <span class="toggle-none">
+                                                {{page.name}}
+                                            </span>
+                                        </a>
+                                    </li>  
+                                {% endif %}
+                            {% endfor %}   
+                       {% endif %}
 
                         {% if request.user.external_resources.all %}
                             <li class="nav-item">

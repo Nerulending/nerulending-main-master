@@ -148,6 +148,19 @@
                             {% endif %}
                         {% endfor %}   
                     {% endif %}
+                    {% if links %}
+                        {% for page in pages %}
+                            {% if page.is_whitelabel_site %}
+                                <li class="nav-item">
+                                    <a href="{% url 'page' page.id %}" class="nav-link" target="_blank">
+                                        <span class="toggle-none">
+                                            {{page.name}}
+                                        </span>
+                                    </a>
+                                </li>  
+                            {% endif %}
+                        {% endfor %}   
+                    {% endif %}
 
                     {% comment %} <li class="nav-item"><a
                             href="https://play.google.com/store/apps/details?id=com.millenialbusiness.nerulending"

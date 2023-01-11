@@ -85,6 +85,7 @@ urlpatterns = [
     url('affiliate_program/', AffiliatelView.as_view(), name='affiliate'),
     url('faq/', FAQView.as_view(), name='faq'),
     url('testimonial/', TestimonialsView.as_view(), name='testimonial'),
+    url(r'^page/(?P<page_id>\d+)/$', PageView.as_view(), name='page'),
     url('^$', IndexView.as_view(), name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

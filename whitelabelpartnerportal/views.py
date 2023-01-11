@@ -17,13 +17,14 @@ from services.WhiteLabelService import WhiteLabelService
 from user.models import PortalGoal, Portal
 from .forms import WhiteLabelForm
 from .models import *
-from business.models import NavigationLinks
+from business.models import NavigationLinks, Page
 
 
 class HomeWhiteLabelView(View):
     def get(self, request):
         links = NavigationLinks.objects.order_by('name')
-        context = {'links': links}        
+        pages = Page.objects.order_by('name')
+        context = {'links': links, 'pages': pages}
         return render(request, "home-whitelabel.html", context=context)
 
 
