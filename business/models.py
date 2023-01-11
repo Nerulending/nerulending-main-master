@@ -587,6 +587,7 @@ class NavigationLinks(models.Model):
     link = models.CharField(max_length=1000)
     is_main_site = models.BooleanField(default=False)
     is_every_site = models.BooleanField(default=False)
+    is_whitelabel_site = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name.capitalize()   
@@ -596,3 +597,5 @@ def check_navigtion_link(sender, instance, **kwargs):
     parsed = urlparse(instance.link)
     if parsed.scheme == '':
         instance.link = 'https://' + instance.link
+
+

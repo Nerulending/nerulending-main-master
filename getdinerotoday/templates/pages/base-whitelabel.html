@@ -134,6 +134,21 @@
                                             target="_blank" class="nav-link">Download Partner App For Iphone</a></li> -->
                     {% comment %} <li class="nav-item"><a href="https://creator.us.uneeq.io/try/052654b4-2cc9-4660-b3c9-8a7b3abf290e"
                         target="_blank" class="nav-link">Your AI Customer Success Agent</a></li> {% endcomment %}
+
+                    {% if links %}
+                        {% for link in links %}
+                            {% if link.is_whitelabel_site %}
+                                <li class="nav-item">
+                                    <a href="{{link.link}}" class="nav-link" target="_blank">
+                                        <span class="toggle-none">
+                                            {{link.name}}
+                                        </span>
+                                    </a>
+                                </li>  
+                            {% endif %}
+                        {% endfor %}   
+                    {% endif %}
+
                     <li class="nav-item"><a
                             href="https://play.google.com/store/apps/details?id=com.millenialbusiness.nerulending"
                             target="_blank" class="nav-link">Download Partner App For Android</a></li>
