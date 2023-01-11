@@ -143,4 +143,5 @@ urlpatterns = [
     url('subscribe/', subscription, name='subscription_stripe'),
     url('delete_item/', remove, name='delete_item'),
     url('create-my-specific-portal/', login_required(CreateSpecificPortal.as_view(), login_url='/user/login'), name='create_specific_portal'),
+    
 ]

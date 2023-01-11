@@ -2,6 +2,9 @@ from django.apps import apps
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from django.urls import reverse
+from django.utils.http import urlencode
+from django.utils.html import format_html
 
 from .models import *
 
@@ -286,6 +289,24 @@ class PersonalCreditTradeLineAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(PersonalCreditTradeLine, PersonalCreditTradeLineAdmin)
+
+class PageDataAdmin(admin.ModelAdmin):
+    list_display = ("column_1", "column_2", "column_3", "column_4", "column_5", "column_6", "view_associate_page")
+    
+    def view_associate_page(self, obj):
+        try: 
+            id = obj.page_set.first().id
+            url = (
+                reverse("admin:business_page_changelist")
+                + f"{id}" + "/change/?_changelist_filters=e%3D" + f"{id}"
+            )
+            return format_html('<a href="{}">Link</a>', url)
+        except:
+            return "None"
+
+    view_associate_page.short_description = "Page"    
+
+admin.site.register(PageData, PageDataAdmin)
 
 for model in app.get_models():
     try:

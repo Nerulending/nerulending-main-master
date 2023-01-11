@@ -7,6 +7,7 @@ from dynamic.models import Subdomain
 from products.models import UserStepsProduct
 from business.models import NavigationLinks, Page
 
+import json
 
 def get_prices(sub_domain):
     obj = Subdomain.objects.filter(sub_name__exact=sub_domain).first()
@@ -138,5 +139,6 @@ class TestimonialsView(View):
 class PageView(View):
     def get(self, request, page_id):
         page = Page.objects.get(id=page_id)
-        context = {'page': page}
+        data = page.data.all()
+        context = { 'page': page, 'data': data }
         return render(request, 'pagecontent.html', context=context)

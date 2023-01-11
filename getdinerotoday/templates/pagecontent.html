@@ -1,14 +1,130 @@
-{% extends "pages/base-business.html" %} 
+{% extends "pages/base-business.html" %}
 {% load static %} 
 {% block content %}
 <div class="row page-header no-background no-shadow margin-b-0">
-    <div class="col-lg-6 align-self-center">
-      <h2>{{page.name}} </h2>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active">{{page.name}}</li>
-      </ol>
+  <div class="col-lg-6 align-self-center">
+    <h2>{{page.name}} </h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active">{{page.name}}</li>
+    </ol>
+  </div>
+</div>
+<section class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+        <iframe width="100%" height="400" src="{{page.video}}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-default">
+                Data Table
+            </div>
+            <div class="card-body">
+                <table id="datatable" class="table table-striped dt-responsive nowrap">
+                    <thead>
+                    <tr>
+                      {% if page.column_name_1 %}
+                        <th>{{page.column_name_1}}</th>
+                      {% endif %}
+                      {% if page.column_name_1 and page.column_name_2 %}
+                        <th>{{page.column_name_2}}</th>
+                      {% endif %}
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 %}
+                        <th>{{page.column_name_3}}</th>
+                      {% endif %}
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 %}
+                        <th>{{page.column_name_4}}</th>
+                      {% endif %}
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 and page.column_name_5 %}
+                        <th>{{page.column_name_5}}</th>
+                      {% endif %}
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 and page.column_name_5 and page.column_name_6 %}
+                        <th>{{page.column_name_6}}</th>
+                      {% endif %}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for page_data in data %}
+                    <tr>
+
+                      {% if page.column_name_1 %}
+                        <td>
+                          {% if not page.column_name_2 %}
+                            <a class="btn btn-primary" href="{{ page_data.column_1 }}" target="_blank">Link</a>
+                          {% else %}
+                            {{ page_data.column_1 }}
+                          {% endif %}
+                        </td>
+                      {% endif %}
+
+                      {% if page.column_name_1 and page.column_name_2 %}                      
+                        <td>
+                          {% if not page.column_name_3 %}
+                            <a class="btn btn-primary" href="{{ page_data.column_2 }}" target="_blank">Link</a>
+                          {% else %}
+                            {{ page_data.column_2 }}
+                          {% endif %}
+                        </td>
+                      {% endif %}
+
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 %}
+                        <td>
+                          {% if not page.column_name_4 %}
+                            <a class="btn btn-primary" href="{{ page_data.column_3 }}" target="_blank">Link</a>
+                          {% else %}
+                            {{ page_data.column_3 }}
+                          {% endif %}
+                        </td>
+                      {% endif %}
+
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 %}
+                        <td>
+                          {% if not page.column_name_5 %}
+                            <a class="btn btn-primary" href="{{ page_data.column_4 }}" target="_blank">Link</a>
+                          {% else %}
+                            {{ page_data.column_4 }}
+                          {% endif %}
+                        </td>
+                      {% endif %}
+
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 and page.column_name_5 %}
+                        <td>
+                          {% if not page.column_name_6 %}
+                            <a class="btn btn-primary" href="{{ page_data.column_5 }}" target="_blank">Link</a>
+                          {% else %}
+                            {{ page_data.column_5 }}
+                          {% endif %}
+
+                        </td>
+                      {% endif %}
+
+                      {% if page.column_name_1 and page.column_name_2 and page.column_name_3 and page.column_name_4 and page.column_name_5 and page.column_name_6 %}
+                        <td>
+                          <a class="btn btn-primary" href="{{ page_data.column_6 }}" target="_blank">Link</a>                          
+                        </td>
+                      {% endif %}
+                      
+                        {% comment %} <td><a class="btn btn-primary" href="/affiliate/addpaypalinfo/edit/{{ page_data.id }}">Edit</a></td>
+                            <td>  <form method="post" id="delete" name="delete" action="">
+                                    {% csrf_token %}
+                                    <input type="text" name="delete" value="{{ page_data.id }}" hidden/>
+                                    <input type="submit" value="Delete" class="btn btn-primary"/>
+                                </form></td> {% endcomment %}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
+
+</section>
 {% endblock content %}

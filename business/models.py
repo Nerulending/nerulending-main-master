@@ -600,6 +600,19 @@ def check_navigtion_link(sender, instance, **kwargs):
     if parsed.scheme == '':
         instance.link = 'https://' + instance.link
 
+class PageData(models.Model):
+    class meta:
+        db_table = "business_page_data"
+
+    column_1 = models.CharField(max_length=50, default='', blank=True)
+    column_2 = models.CharField(max_length=50, default='', blank=True)
+    column_3 = models.CharField(max_length=50, default='', blank=True)
+    column_4 = models.CharField(max_length=50, default='', blank=True)
+    column_5 = models.CharField(max_length=50, default='', blank=True)
+    column_6 = models.CharField(max_length=200, default='', blank=True)
+
+    def __str__(self):
+        return f"{self.column_1}, {self.column_2}, ..."
 
 class Page(models.Model):
     class meta:
@@ -618,8 +631,8 @@ class Page(models.Model):
     column_name_4 = models.CharField(max_length=50, default='', blank=True)
     column_name_5 = models.CharField(max_length=50, default='', blank=True)
     column_name_6 = models.CharField(max_length=50, default='', blank=True)
-
-    data = models.JSONField(default='', blank=True)
+    
+    data = models.ManyToManyField("PageData", blank=True)
 
     def __str__(self):
         return self.name.capitalize()   
