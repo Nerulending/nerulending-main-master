@@ -611,8 +611,31 @@ class PageData(models.Model):
     column_5 = models.CharField(max_length=50, default='', blank=True)
     column_6 = models.CharField(max_length=200, default='', blank=True)
 
+    def convert_to_url(self, field):
+        parsed = urlparse(field)
+        if parsed.scheme == '':
+            return 'https://' + field
+        else:
+            return field
+
     def __str__(self):
         return f"{self.column_1}, {self.column_2}, ..."
+
+@receiver(pre_save, sender=PageData)
+def check_navigtion_link(sender, instance, **kwargs):
+    if instance.column_1 and not instance.column_2:
+        instance.column_1 = instance.convert_to_url(instance.column_1)
+    elif instance.column_2 and not instance.column_3:
+        instance.column_2 = instance.convert_to_url(instance.column_2)
+    elif instance.column_3 and not instance.column_4:
+        instance.column_3 = instance.convert_to_url(instance.column_3)
+    elif instance.column_4 and not instance.column_5:
+        instance.column_4 = instance.convert_to_url(instance.column_4)
+    elif instance.column_5 and not instance.column_6:
+        instance.column_5 = instance.convert_to_url(instance.column_5)
+    else:
+        instance.column_6 = instance.convert_to_url(instance.column_6)
+
 
 class Page(models.Model):
     class meta:

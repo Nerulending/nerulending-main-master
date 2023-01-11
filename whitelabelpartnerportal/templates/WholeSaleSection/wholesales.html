@@ -40,11 +40,14 @@
                                     <td>${{ wholesale.price }}</td>
                                     <td>{{ wholesale.description }}</td>
                                     <td>
+                                        <a href="{{wholesale.link}}" target="_blank"> <button class="btn btn-primary">Add To Cart</button></a>
+                                    </td>
+                                    {% comment %} <td>
                                         <form method="post">{% csrf_token %}
                                             <input type="hidden" name="product_id" value="{{ wholesale.product_id }}">
                                             <button class="btn btn-primary">Add To Cart</button>
                                         </form>
-                                    </td>
+                                    </td> {% endcomment %}
                                 </tr>
                             {% endfor %}
                             </tbody>

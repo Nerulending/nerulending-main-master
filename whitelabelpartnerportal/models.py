@@ -10,6 +10,10 @@ from services.FileServices import get_file_path
 from user.models import Profile
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from urllib.parse import urlparse
+
 app_name = 'whitelabelpartnerportal'
 
 
@@ -334,6 +338,13 @@ class WhitelabelBusinessPackage(ModelMixin, models.Model):
 class WholeSale(ProductModel):
     name = models.CharField(max_length=100, null=True)
     description = models.CharField(max_length=200, null=True)
+    link = models.CharField(max_length=100, null=True)
+
+@receiver(pre_save, sender=WholeSale)
+def check_wholesale_link(sender, instance, **kwargs):
+    parsed = urlparse(instance.link)
+    if parsed.scheme == '':
+        instance.link = 'https://' + instance.link
 
 
 class WholeSaleOrder(models.Model):
