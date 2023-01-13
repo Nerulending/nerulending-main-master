@@ -33,13 +33,6 @@ def ProfileProcessor(request):
 def whitelabel_processor(request):
     obj = Subdomain.objects.filter(sub_name__exact=request.host.name).first()
 
-    try:
-        user = Profile.objects.get(user=request.user)
-        is_admin = False
-    except Exception:
-        is_admin = True
-        pass
-
     if not request.user.is_anonymous:
         # portal_count = Profile.objects.get(user=request.user).count()
         portal_count = 1
@@ -62,7 +55,7 @@ def whitelabel_processor(request):
             'iswhitelabeladmin': bool(portal_count),
             'why_buy_video': 'https://www.youtube.com/embed/el9irdyyWcQ',
             'dynamic': {
-                'is_main_site': is_admin,
+                'is_main_site': True,
                 'show_index_white_label': True,
 
                 'title': 'Get Dinero Today',
