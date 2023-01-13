@@ -20,19 +20,25 @@ def ProfileProcessor(request):
     try:
         user = Profile.objects.get(user=request.user)
 
-        for i, k in plans.items():
-            if k.objects.filter(user=user).count() > 0:
-                return {'on_payment_plan': True}
+        # for i, k in plans.items():
+        #     if k.objects.filter(user=user).count() > 0:
+        #         return {'on_payment_plan': True}
+
+        return {'user_profile': user}
     except Exception:
         pass
-    return {}
-
-
-
+    return {'user_profile': None}
 
 
 def whitelabel_processor(request):
     obj = Subdomain.objects.filter(sub_name__exact=request.host.name).first()
+
+    try:
+        user = Profile.objects.get(user=request.user)
+        is_admin = False
+    except Exception:
+        is_admin = True
+        pass
 
     if not request.user.is_anonymous:
         # portal_count = Profile.objects.get(user=request.user).count()
@@ -43,18 +49,20 @@ def whitelabel_processor(request):
     print("CONTEXT: ", request.host)
 
     if obj:
+        # subdomain
         return {
             'dynamic': obj,
             'why_buy_video': 'https://www.youtube.com/embed/bM8A5BDZglk',
             'iswhitelabeladmin': bool(portal_count),
         }
     else:
+        # main site
         return {
 
             'iswhitelabeladmin': bool(portal_count),
             'why_buy_video': 'https://www.youtube.com/embed/el9irdyyWcQ',
             'dynamic': {
-                'is_main_site': True,
+                'is_main_site': is_admin,
                 'show_index_white_label': True,
 
                 'title': 'Get Dinero Today',

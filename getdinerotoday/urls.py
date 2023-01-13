@@ -22,7 +22,6 @@ from django.urls import include, path
 from django.views.static import serve
 import debug_toolbar
 
-
 from .views import *
 
 urlpatterns = [
