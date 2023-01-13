@@ -11,7 +11,7 @@ def partner_only(function):
         if user.is_partner:
             return function(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect('/')            
+            return HttpResponseRedirect('/dashboard')            
     except Exception:
         return function(request, *args, **kwargs)
 
